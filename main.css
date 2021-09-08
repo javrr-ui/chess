@@ -38,10 +38,17 @@ body {
 img {
     width: 65px;
     height: 65px;
+    transition-duration: 0.3s;
 }
 
-.piece {
-    background-color: black;
-    width: 20px;
-    height: 20px;
+
+img:active {
+    transform: scale(1.2);
+}
+.piece-up {
+    transform: scale(1.2);
+}
+
+.piece-down {
+    transform: scale(1);
 }
