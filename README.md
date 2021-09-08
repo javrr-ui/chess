@@ -1,3 +1,3 @@
 # chess
 
-live demo: https://javrr-ui.github.io/chess/
+live demo: <https://javrr-ui.github.io/chess/>
