@@ -4,43 +4,42 @@ const blocks = document.querySelectorAll(".square");
 
 let selectedPiece;
 
-
+InitialpositionPiece();
 pieces.forEach(piece => {
     piece.addEventListener("click", e => {
-        
-        if(piece.classList.value.includes("piece-down")){
+
+        if (piece.classList.value.includes("piece-down")) {
             piece.classList.remove("piece-down")
             piece.classList.add("piece-up");
             selectedPiece = piece;
-        }else{
+        } else {
             piece.classList.remove("piece-up")
             piece.classList.add("piece-down");
             selectedPiece = null;
         }
-        console.log("last value="+piece.classList.value);
+        
         e.stopPropagation();
     })
 })
 
 blocks.forEach(block => {
-    block.addEventListener("click", e=>{
+    block.addEventListener("click", e => {
 
-        let rect = block.getBoundingClientRect();
-        console.log(rect.top, rect.right, rect.bottom, rect.left);
-
-        console.log(selectedPiece.clientX);
-        console.log(selectedPiece.clienty);
-        console.log(e.clientX)
-        console.log(e.clientY)
-        console.log(selectedPiece)
-        // selectedPiece.style.transform = `translateY(${10}px) translateX(${10}px)`;
-        selectedPiece.offsetWidth = "200px";
-        console.log(block.offsetWidth);
-        console.log(block.offsetHeight);
-        console.log()
-        console.log(block.classList.value);
-
+        if(selectedPiece){
+            selectedPiece.style.top = block.offsetTop + "px";
+            selectedPiece.style.left = block.offsetLeft + "px";
+            selectedPiece.classList.remove("piece-up")
+            selectedPiece.classList.add("piece-down");
+            selectedPiece = null;
+        }
         e.stopPropagation();
     })
 })
+
+function InitialpositionPiece(){
+    pieces.forEach(piece => {
+        piece.style.top = piece.parentElement.offsetTop +"px";
+        piece.style.left = piece.parentElement.offsetLeft +"px";
+    })
+}
 
