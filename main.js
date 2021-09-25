@@ -4,7 +4,10 @@ const blocks = document.querySelectorAll(".square");
 
 let selectedPiece;
 
-InitialpositionPiece();
+initialPositionPiece();
+//Everytime window is resized, run initialPositionPiece, to keep pieces in their respective block
+window.addEventListener("resize", initialPositionPiece);
+
 pieces.forEach(piece => {
     piece.addEventListener("click", e => {
 
@@ -17,7 +20,7 @@ pieces.forEach(piece => {
             piece.classList.add("piece-down");
             selectedPiece = null;
         }
-        
+
         e.stopPropagation();
     })
 })
@@ -25,21 +28,25 @@ pieces.forEach(piece => {
 blocks.forEach(block => {
     block.addEventListener("click", e => {
 
-        if(selectedPiece){
+        if (selectedPiece) {
             selectedPiece.style.top = block.offsetTop + "px";
             selectedPiece.style.left = block.offsetLeft + "px";
             selectedPiece.classList.remove("piece-up")
             selectedPiece.classList.add("piece-down");
-            selectedPiece = null;
+
+            //Append piece image to the selected block after animation is finished (wait 300ms)
+            setTimeout(() => {
+                block.appendChild(selectedPiece);
+                selectedPiece = null;
+            }, 300);
         }
         e.stopPropagation();
     })
 })
 
-function InitialpositionPiece(){
+function initialPositionPiece() {
     pieces.forEach(piece => {
-        piece.style.top = piece.parentElement.offsetTop +"px";
-        piece.style.left = piece.parentElement.offsetLeft +"px";
+        piece.style.top = piece.parentElement.offsetTop + "px";
+        piece.style.left = piece.parentElement.offsetLeft + "px";
     })
 }
-
