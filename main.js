@@ -3,7 +3,7 @@ const pieces = document.querySelectorAll("img");
 const blocks = document.querySelectorAll(".square");
 
 let selectedPiece;
-
+let selectedBlock;
 initialPositionPiece();
 //Everytime window is resized, run initialPositionPiece, to keep pieces in their respective block
 window.addEventListener("resize", initialPositionPiece);
@@ -23,6 +23,10 @@ pieces.forEach(piece => {
 
         e.stopPropagation();
     })
+
+    piece.addEventListener("transitionend", e => {
+        selectedBlock.appendChild(selectedPiece);
+    })
 })
 
 blocks.forEach(block => {
@@ -33,12 +37,7 @@ blocks.forEach(block => {
             selectedPiece.style.left = block.offsetLeft + "px";
             selectedPiece.classList.remove("piece-up")
             selectedPiece.classList.add("piece-down");
-
-            //Append piece image to the selected block after animation is finished (wait 300ms)
-            setTimeout(() => {
-                block.appendChild(selectedPiece);
-                selectedPiece = null;
-            }, 300);
+            selectedBlock = block;
         }
         e.stopPropagation();
     })
