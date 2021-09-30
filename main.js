@@ -29,7 +29,6 @@ pieces.forEach(piece => {
         if (e.propertyName === "top" || e.propertyName === "left") {
             if (selectedPiece && selectedBlock) {
                 selectedBlock.appendChild(selectedPiece);
-                console.log(e.propertyName);
             }
         }
     })
