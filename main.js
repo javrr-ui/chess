@@ -26,8 +26,8 @@ pieces.forEach(piece => {
 
     piece.addEventListener("transitionend", e => {
         //AppendChild only when piece is moved, and not when is lifted by the user
-        if(e.propertyName==="top"||e.propertyName==="left"){
-            if(selectedPiece&&selectedBlock){
+        if (e.propertyName === "top" || e.propertyName === "left") {
+            if (selectedPiece && selectedBlock) {
                 selectedBlock.appendChild(selectedPiece);
                 console.log(e.propertyName);
             }
